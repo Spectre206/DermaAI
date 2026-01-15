@@ -1,0 +1,6 @@
+# 1. Ignore ALL .h5 files by default (Prevents bloat)
+*.h5
+
+# 2. Force-include ONLY the active model
+# (Change this line when you upgrade to v2, v3, etc.)
+!skin_model_v1.h5

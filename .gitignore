@@ -1,0 +1,21 @@
+# General Python
+__pycache__/
+*.py[cod]
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Environment Variables (Security Risk!)
+.env
+
+# Virtual Environments (We use Pipenv, so ignore these local folders)
+.venv/
+env/
+venv/
+
+# IDE Settings
+.vscode/
+.idea/
