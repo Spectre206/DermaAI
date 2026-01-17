@@ -12,7 +12,8 @@ djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 djoser = "*"
 django-filter = "*"
-django-cryptography = "*"
+numpy = "*"
+cryptography = "*"
 
 [dev-packages]
 

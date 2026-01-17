@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "10c33dd28598f07d525527a336814540c9c1121d1c57261fca1c055a799bacb7"
+            "sha256": "39fb755e1044d8f42521ce2e684b13716c72add60817328b72920738ca376f0f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -313,6 +313,7 @@
                 "sha256:ef639cb3372f69ec44915fafcd6698b6cc78fbe0c2ea41be867f6ed612811963",
                 "sha256:f260d0d41e9b4da1ed1e0f1ce571f97fe370b152ab18778e9e8f67d6af432018"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.8' and python_full_version not in '3.9.0, 3.9.1'",
             "version": "==46.0.3"
         },
@@ -332,22 +333,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.12'",
             "version": "==6.0.1"
-        },
-        "django-appconf": {
-            "hashes": [
-                "sha256:15a88d60dd942d6059f467412fe4581db632ef03018a3c183fb415d6fc9e5cec",
-                "sha256:b81bce5ef0ceb9d84df48dfb623a32235d941c78cc5e45dbb6947f154ea277f4"
-            ],
-            "markers": "python_version >= '3.9'",
-            "version": "==1.2.0"
-        },
-        "django-cryptography": {
-            "hashes": [
-                "sha256:93702fcf0d75865d55362f20ecd95274c4eef60ccdce46cbdade0420acee07cb"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '3.6'",
-            "version": "==1.1"
         },
         "django-filter": {
             "hashes": [
@@ -812,6 +797,7 @@
                 "sha256:f93bc6892fe7b0663e5ffa83b61aab510aacffd58c16e012bb9352d489d90cb7",
                 "sha256:fb1461c99de4d040666ca0444057b06541e5642f800b71c56e6ea92d6a853a0c"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.11'",
             "version": "==2.4.1"
         },
