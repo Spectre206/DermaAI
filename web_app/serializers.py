@@ -14,5 +14,5 @@ class SkinScanSerializer(serializers.ModelSerializer):
     class Meta:
         model = SkinLesionScan
         fields = [
-            'id', 'image', 'prediction', 'confidence', 'created_at'
+            'id', 'image', 'heatmap_image', 'prediction', 'confidence', 'created_at'
         ]

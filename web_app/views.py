@@ -42,6 +42,7 @@ class PredictSkinDiseaseView(APIView):
                 # 4. Save Results to Database
                 scan_record.prediction = result['diagnosis']
                 scan_record.confidence = float(result['confidence'])
+                scan_record.heatmap_image = result.get('heatmap_url')
                 scan_record.save()
                 
                 # 5. Return Response
@@ -50,7 +51,8 @@ class PredictSkinDiseaseView(APIView):
                     "scan_id": scan_record.id,
                     "prediction": scan_record.prediction,
                     "confidence": f"{scan_record.confidence}%",
-                    "image_url": scan_record.image.url
+                    "image_url": scan_record.image.url,
+                    "heatmap_url": scan_record.heatmap_image
                 }, status=status.HTTP_201_CREATED)
 
             except Exception as e:

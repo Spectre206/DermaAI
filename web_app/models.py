@@ -10,6 +10,7 @@ class SkinLesionScan(models.Model):
 
     # The Scanned Image
     image = models.ImageField(upload_to='lesion_scans/%Y/%m/%d/')
+    heatmap_image = models.CharField(max_length=255, blank=True, null=True)
 
     # AI Results (Saved after prediction)
     prediction = models.CharField(max_length=100, blank=True)

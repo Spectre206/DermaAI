@@ -14,6 +14,8 @@ djoser = "*"
 django-filter = "*"
 numpy = "*"
 cryptography = "*"
+opencv-python = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
