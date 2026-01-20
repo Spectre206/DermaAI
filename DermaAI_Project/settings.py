@@ -166,3 +166,8 @@ DJOSER = {
 import os
 ACTIVE_MODEL_FILENAME = 'skin_model_v1.h5'
 MODEL_PATH = os.path.join (BASE_DIR, 'ml_engine', 'models', ACTIVE_MODEL_FILENAME)
+
+# --- MEDIA CONFIGURATION ---
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

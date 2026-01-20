@@ -26,7 +26,8 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
 
     # The AI Brain
-    #path('api/web/', include('web_app.urls')),
+    path('api/web/', include('web_app.urls')),
+    
     # Hospital management: Appointments
     path('api/appointments/', include('appointments.urls')),
 
