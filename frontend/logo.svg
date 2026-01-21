@@ -1,0 +1,82 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14B8A6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D9488;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="mixedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#14B8A6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D9488;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <g transform="translate(100, 100)">
+    <circle cx="0" cy="0" r="65" fill="url(#blueGradient)" opacity="0.1"/>
+    
+    <path d="M -35,-25 Q -25,-35 0,-35 Q 25,-35 35,-25 L 35,25 Q 25,35 0,35 Q -25,35 -35,25 Z" 
+          fill="url(#blueGradient)" 
+          opacity="0.8"/>
+    
+    <g opacity="0.9">
+      <path d="M -40,-10 L -25,-10 L -25,10 L -40,10 Z" fill="url(#tealGradient)">
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0,0; 80,0; 0,0"
+          dur="2.5s"
+          repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <g fill="#14B8A6" opacity="0.6">
+      <circle cx="-15" cy="-15" r="3"/>
+      <circle cx="0" cy="-18" r="2.5"/>
+      <circle cx="15" cy="-15" r="3"/>
+      <circle cx="-18" cy="0" r="2"/>
+      <circle cx="18" cy="0" r="2"/>
+      <circle cx="-15" cy="15" r="3"/>
+      <circle cx="0" cy="18" r="2.5"/>
+      <circle cx="15" cy="15" r="3"/>
+    </g>
+    
+    <g transform="translate(0, 0)">
+      <rect x="-18" y="-18" width="36" height="36" rx="3" fill="url(#tealGradient)" filter="url(#glow)"/>
+      
+      <line x1="-12" y1="-8" x2="12" y2="-8" stroke="#ffffff" stroke-width="2"/>
+      <line x1="-12" y1="0" x2="12" y2="0" stroke="#ffffff" stroke-width="2"/>
+      <line x1="-12" y1="8" x2="12" y2="8" stroke="#ffffff" stroke-width="2"/>
+      
+      <circle cx="-12" cy="-8" r="2" fill="#ffffff"/>
+      <circle cx="12" cy="-8" r="2" fill="#ffffff"/>
+      <circle cx="-12" cy="8" r="2" fill="#ffffff"/>
+      <circle cx="12" cy="8" r="2" fill="#ffffff"/>
+      
+      <circle cx="0" cy="0" r="3" fill="#ffffff">
+        <animate attributeName="r" values="3;4;3" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <g fill="none" stroke="url(#mixedGradient)" stroke-width="3" opacity="0.7">
+      <path d="M 0,-55 A 55,55 0 0,1 38.9,-38.9" stroke-linecap="round"/>
+      <path d="M 55,0 A 55,55 0 0,1 38.9,38.9" stroke-linecap="round"/>
+      <path d="M 0,55 A 55,55 0 0,1 -38.9,38.9" stroke-linecap="round"/>
+      <path d="M -55,0 A 55,55 0 0,1 -38.9,-38.9" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

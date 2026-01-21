@@ -171,8 +171,8 @@ MODEL_PATH = os.path.join (BASE_DIR, 'ml_engine', 'models', ACTIVE_MODEL_FILENAM
 
 # --- MEDIA CONFIGURATION ---
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # --- CORS CONFIGURATION ---
 CORS_ALLOW_ALL_ORIGINS = True  # Allows any HTML file to talk to the API

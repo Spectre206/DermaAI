@@ -24,3 +24,13 @@ class SkinLesionScan(models.Model):
 
     def __str__(self):
         return f"{self.patient} - {self.prediction} ({self.confidence}%)"
+
+class Feedback(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    rating = models.IntegerField(default=5)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.subject}"

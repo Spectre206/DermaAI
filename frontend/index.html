@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaAI - Intelligent Skin Screening</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #3B82F6 0%, #14B8A6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Buttons */
+        .btn-primary-grad {
+            background: linear-gradient(135deg, #3B82F6 0%, #14B8A6 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn-primary-grad:hover {
+            transform: translateY(-3px);
+            color: white;
+            box-shadow: 0 5px 15px rgba(20, 184, 166, 0.3);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: #f8f9fa;
+            padding: 80px 0 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            border: none;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        .feature-card:hover { transform: translateY(-10px); }
+        
+        .icon-box {
+            width: 60px; height: 60px;
+            border-radius: 15px;
+            background: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 1.5rem;
+        }
+
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffeeba;
+            padding: 15px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+
+        /* Stats Badge */
+        .stats-badge {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            min-width: 120px;
+        }
+        .stats-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #14B8A6;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div style="width: 250px;">
+                    <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="tealGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#14B8A6;stop-opacity:1" /><stop offset="100%" style="stop-color:#0D9488;stop-opacity:1" /></linearGradient>
+                          <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" /><stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" /></linearGradient>
+                          <linearGradient id="mixedGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" /><stop offset="50%" style="stop-color:#14B8A6;stop-opacity:1" /><stop offset="100%" style="stop-color:#0D9488;stop-opacity:1" /></linearGradient>
+                          <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                        </defs>
+                        <g transform="translate(100, 100)">
+                          <circle cx="0" cy="0" r="65" fill="url(#blueGradient)" opacity="0.1"/>
+                          <path d="M -35,-25 Q -25,-35 0,-35 Q 25,-35 35,-25 L 35,25 Q 25,35 0,35 Q -25,35 -35,25 Z" fill="url(#blueGradient)" opacity="0.8"/>
+                          <g opacity="0.9">
+                            <path d="M -40,-10 L -25,-10 L -25,10 L -40,10 Z" fill="url(#tealGradient)">
+                              <animateTransform attributeName="transform" type="translate" values="0,0; 80,0; 0,0" dur="2.5s" repeatCount="indefinite"/>
+                              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+                            </path>
+                          </g>
+                          <g fill="#14B8A6" opacity="0.6"><circle cx="-15" cy="-15" r="3"/><circle cx="0" cy="-18" r="2.5"/><circle cx="15" cy="-15" r="3"/><circle cx="-18" cy="0" r="2"/><circle cx="18" cy="0" r="2"/><circle cx="-15" cy="15" r="3"/><circle cx="0" cy="18" r="2.5"/><circle cx="15" cy="15" r="3"/></g>
+                          <g transform="translate(0, 0)">
+                            <rect x="-18" y="-18" width="36" height="36" rx="3" fill="url(#tealGradient)" filter="url(#glow)"/>
+                            <line x1="-12" y1="-8" x2="12" y2="-8" stroke="#ffffff" stroke-width="2"/><line x1="-12" y1="0" x2="12" y2="0" stroke="#ffffff" stroke-width="2"/><line x1="-12" y1="8" x2="12" y2="8" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="-12" cy="-8" r="2" fill="#ffffff"/><circle cx="12" cy="-8" r="2" fill="#ffffff"/><circle cx="-12" cy="8" r="2" fill="#ffffff"/><circle cx="12" cy="8" r="2" fill="#ffffff"/><circle cx="0" cy="0" r="3" fill="#ffffff"><animate attributeName="r" values="3;4;3" dur="1.5s" repeatCount="indefinite"/></circle>
+                          </g>
+                          <g fill="none" stroke="url(#mixedGradient)" stroke-width="3" opacity="0.7"><path d="M 0,-55 A 55,55 0 0,1 38.9,-38.9" stroke-linecap="round"/><path d="M 55,0 A 55,55 0 0,1 38.9,38.9" stroke-linecap="round"/><path d="M 0,55 A 55,55 0 0,1 -38.9,38.9" stroke-linecap="round"/><path d="M -55,0 A 55,55 0 0,1 -38.9,-38.9" stroke-linecap="round"/></g>
+                        </g>
+                        <g transform="translate(220, 100)">
+                          <text x="0" y="10" font-family="'Arial', 'Helvetica', sans-serif" font-size="58" font-weight="700" letter-spacing="-1">
+                            <tspan fill="#2563EB">Derma</tspan><tspan fill="#14B8A6">AI</tspan>
+                          </text>
+                        </g>
+                      </svg>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#model">The AI Model</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link fw-bold text-primary" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-primary-grad btn-sm px-4" href="register.html">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <span class="badge bg-light text-primary mb-3 border px-3 py-2 rounded-pill">
+                        <i class="fas fa-flask me-1"></i> University Lab Project
+                    </span>
+                    <h1 class="display-3 fw-bold mb-4">
+                        Intelligent Screening for <br>
+                        <span class="text-gradient">Skin Lesions</span>
+                    </h1>
+                    <p class="lead text-muted mb-4">
+                        An educational AI assistant that uses Computer Vision to analyze dermoscopic images 
+                        and identify 7 common skin conditions.
+                    </p>
+                    
+                    <div class="disclaimer-banner mb-5 text-start mx-auto" style="max-width: 600px;">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Important:</strong> DermaAI is a screening assistant tool, not a replacement for doctors. 
+                        It does not provide a definitive medical diagnosis. Always consult a certified dermatologist.
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="register.html" class="btn btn-primary-grad">Try AI Scan Now</a>
+                        <a href="login.html" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold" style="padding-top:12px;">Existing User</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="model" class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 mb-4 mb-md-0">
+                    <h2 class="fw-bold mb-3">Powered by <span class="text-primary">EfficientNetB0</span></h2>
+                    <p class="text-muted">
+                        Our model leverages the EfficientNetB0 architecture, optimized for efficiency and accuracy. 
+                        It has been trained on a diverse dataset of high-resolution <strong>dermoscopic images</strong> 
+                        to recognize distinct visual patterns of skin diseases.
+                    </p>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Trained on 7 Disease Classes</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 89% Overall Test Accuracy</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Grad-CAM Explainability</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 offset-md-1">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="stats-badge bg-light">
+                                <div class="stats-number">89%</div>
+                                <small class="text-muted fw-bold">Accuracy</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stats-badge bg-light">
+                                <div class="stats-number">7</div>
+                                <small class="text-muted fw-bold">Classes</small>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="p-3 bg-light rounded-3 border">
+                                <h6 class="fw-bold mb-3 text-center text-muted">Detectable Conditions</h6>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <span class="badge bg-white text-dark border">Melanoma</span>
+                                    <span class="badge bg-white text-dark border">Atopic Dermatitis</span>
+                                    <span class="badge bg-white text-dark border">Benign Keratosis</span>
+                                    <span class="badge bg-white text-dark border">Nevus</span>
+                                    <span class="badge bg-white text-dark border">Ringworm</span>
+                                    <span class="badge bg-white text-dark border">Squamous Cell</span>
+                                    <span class="badge bg-success bg-opacity-10 text-success border border-success">Normal Skin</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-5" style="background-color: #f8f9fa;">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Lab Project Features</h2>
+                <p class="text-muted">Bridging the gap between Computer Vision and Dermatology.</p>
+            </div>
+            <div class="row g-4">
+                
+                <div class="col-md-6 col-lg-6">
+                    <div class="feature-card bg-white">
+                        <div class="icon-box"><i class="fas fa-microscope"></i></div>
+                        <h4>Dermoscopic Analysis</h4>
+                        <p class="text-muted">Designed specifically to analyze dermoscopic (magnified) images of skin lesions for pattern recognition.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-6">
+                    <div class="feature-card bg-white">
+                        <div class="icon-box" style="color: #14B8A6; background: rgba(20, 184, 166, 0.1);"><i class="fas fa-layer-group"></i></div>
+                        <h4>Explainable AI</h4>
+                        <p class="text-muted">Uses Grad-CAM heatmaps to visualize which pixels influenced the model's decision, adding transparency.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-6">
+                    <div class="feature-card bg-white">
+                        <div class="icon-box" style="color: #DC2626; background: rgba(220, 38, 38, 0.1);"><i class="fas fa-user-md"></i></div>
+                        <h4>Doctor Referral</h4>
+                        <p class="text-muted">If a risk is detected, the system recommends specialists in your area (e.g., Peshawar) for a proper diagnosis.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6">
+                    <div class="feature-card bg-white">
+                        <div class="icon-box" style="color: #8B5CF6; background: rgba(139, 92, 246, 0.1);"><i class="fas fa-shield-alt"></i></div>
+                        <h4>AES-256 Encryption</h4>
+                        <p class="text-muted">Patient symptoms and sensitive medical data are encrypted in the database using industry-standard AES-256 for maximum privacy.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4 text-center">
+        <div class="container">
+            <p class="mb-0 small opacity-75">&copy; 2026 DermaAI. University Lab Project.</p>
+            <p class="mb-0 x-small text-muted" style="font-size: 0.75rem;">Not for clinical use.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

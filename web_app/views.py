@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
-from .serializers import PredictionSerializer, SkinScanSerializer
-from .models import SkinLesionScan  
+from .serializers import PredictionSerializer, SkinScanSerializer, FeedbackSerializer
+from .models import SkinLesionScan , Feedback 
 
 # Import AI Logic
 from ml_engine.predictor import predict_image 
@@ -68,4 +68,12 @@ class PatientHistoryView(generics.ListAPIView):
 
     def get_queryset(self):
         return SkinLesionScan.objects.filter(patient=self.request.user).order_by('-created_at')
-    
+
+class SubmitFeedbackView(generics.CreateAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Automatically attach the login user
+        serializer.save(user=self.request.user)    

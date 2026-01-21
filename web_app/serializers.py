@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import SkinLesionScan
+from .models import SkinLesionScan, Feedback
 
 class PredictionSerializer(serializers.Serializer):
     # The image field
@@ -15,4 +15,11 @@ class SkinScanSerializer(serializers.ModelSerializer):
         model = SkinLesionScan
         fields = [
             'id', 'image', 'heatmap_image', 'prediction', 'confidence', 'created_at'
+        ]
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = [
+            'id', 'subject', 'message', 'rating', 'created_at'
         ]
