@@ -8,82 +8,254 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
             --primary-grad: linear-gradient(135deg, #3B82F6 0%, #14B8A6 100%);
+            --primary-light: #f0f9ff;
+            --primary-color: #3B82F6;
+            --teal-color: #14B8A6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --gray-light: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
         }
-        body { background-color: #f3f4f6; font-family: 'Segoe UI', sans-serif; }
-        
-        /* Navbar */
-        .dashboard-nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 0.5rem 1rem;
-        }
-        .nav-logo { width: 250px; height: auto; }
 
-        /* Tabs */
-        .nav-pills .nav-link {
-            color: #64748b;
-            font-weight: 500;
-            border-radius: 10px;
-            padding: 10px 20px;
-            margin-right: 10px;
-            transition: all 0.2s;
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: var(--text-dark);
+            font-size: 0.9rem;
         }
+
+        /* ===== NAVBAR ===== */
+        .dashboard-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 0.5rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .nav-logo { width: 180px; height: auto; }
+
+        .user-section { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; }
+        .user-info strong { color: var(--primary-color); }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .logout-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3); color: white; }
+
+        /* ===== TABS ===== */
+        .nav-pills {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-muted);
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-pills .nav-link:hover:not(.active) {
+            background: var(--gray-light);
+            color: var(--primary-color);
+        }
+
         .nav-pills .nav-link.active {
             background: var(--primary-grad);
             color: white;
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
         }
-        .nav-pills .nav-link:hover:not(.active) { background: #e2e8f0; }
 
-        /* Cards */
+        /* ===== CARDS ===== */
         .feature-card {
             background: white;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
             overflow: hidden;
         }
-        
-        /* Buttons */
-        .btn-grad {
-            background: var(--primary-grad);
-            border: none; color: white;
-            font-weight: 600;
-        }
-        .btn-grad:hover { opacity: 0.95; color: white; }
 
-        /* AI Results */
+        /* ===== AI SCAN TAB ===== */
+        .upload-zone {
+            border: 2px dashed var(--primary-color);
+            border-radius: 12px;
+            padding: 2rem;
+            background: var(--primary-light);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-zone:hover { background: #e0f2fe; }
+        .upload-icon { font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+
+        /* Preview & Result Images */
+        .image-box {
+            background: var(--gray-light);
+            border-radius: 10px;
+            padding: 0.5rem;
+            border: 1px solid var(--gray-border);
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .image-box img {
+            max-height: 200px;
+            width: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .image-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
         .confidence-badge {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 800;
             background: var(--primary-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin: 0.5rem 0;
         }
+
+        /* Result Alerts */
+        .alert-custom {
+            border-radius: 10px;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            border: 1px solid transparent;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .alert-danger { background: #fff5f5; color: #991b1b; border-color: #fecaca; }
+        .alert-success { background: #f0fdf4; color: #065f46; border-color: #bbf7d0; }
+        .alert-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+
+        .help-message-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.8rem;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* ===== DOCTORS TAB ===== */
+        .doctor-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .doctor-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: var(--primary-grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .doctor-info h5 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .doctor-info small { font-size: 0.8rem; }
+
+        /* ===== BUTTONS ===== */
+        .btn-grad {
+            background: var(--primary-grad);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        .btn-grad:hover { opacity: 0.9; color: white; transform: translateY(-1px); }
+
+        /* ===== MODERN INPUTS (Feedback & Booking) ===== */
+        .modern-input {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        .modern-input:focus {
+            background: #ffffff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+        .modern-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            display: block;
+        }
+
+        /* ===== FEEDBACK ===== */
+        .feedback-form { padding: 2rem; max-width: 600px; margin: 0 auto; }
+        .star-label { font-size: 1.8rem; cursor: pointer; color: #cbd5e1; transition: 0.2s; }
+        .star-input:checked ~ .star-label { color: #fbbf24; }
+        .star-label:hover { color: #fbbf24; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar dashboard-nav sticky-top mb-4">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+    <nav class="navbar dashboard-nav">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="#">
                 <img src="logo-full.svg" alt="DermaAI" class="nav-logo">
             </a>
-            <div class="d-flex align-items-center">
-                <span class="me-3 text-muted d-none d-md-block">
-                    Welcome, <strong id="username-display" class="text-primary">Loading...</strong>
+            <div class="user-section ms-auto">
+                <span class="user-info text-muted d-none d-md-block">
+                    Welcome, <strong id="username-display">Loading...</strong>
                 </span>
-                <button class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="logout()">
-                    <i class="fas fa-sign-out-alt me-1"></i> Logout
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt me-1"></i>Logout
                 </button>
             </div>
         </div>
     </nav>
 
-    <div class="container pb-5">
-        <ul class="nav nav-pills mb-4 justify-content-center" id="pills-tab" role="tablist">
+    <div class="container py-4">
+        <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <button class="nav-link active" id="scan-tab-btn" data-bs-toggle="pill" data-bs-target="#scan-tab">
                     <i class="fas fa-microscope me-2"></i>AI Scan
@@ -111,127 +283,154 @@
             <div class="tab-pane fade show active" id="scan-tab">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div class="feature-card p-4 text-center">
-                            <h4 class="fw-bold mb-3">Upload Skin Lesion</h4>
-                            <div class="p-4 border rounded bg-light mb-3">
-                                <input type="file" class="form-control mb-3" id="imageInput" accept="image/*" onchange="previewImage(event)">
-                                <img id="preview" class="img-fluid rounded shadow-sm d-none" style="max-height: 250px;">
-                            </div>
-                            <button class="btn btn-grad w-100 py-2 rounded-pill" onclick="uploadScan()" id="scanBtn">
-                                Analyze Image
-                            </button>
+                        <div class="feature-card p-4">
+                            <h5 class="text-center fw-bold mb-3">Skin Lesion Analysis</h5>
                             
-                            <div id="resultArea" class="mt-4 d-none">
-                                <hr>
-                                <h5 class="text-muted text-uppercase small ls-1">Diagnosis Result</h5>
-                                <h2 class="text-dark fw-bold" id="predText"></h2>
-                                <div class="confidence-badge" id="confText"></div>
-                                <p class="text-muted small">Confidence Score</p>
-                                
-                                <div class="mt-3 mb-4">
-                                    <p class="fw-bold text-dark">Explainable AI (Heatmap)</p>
-                                    <img id="heatmapImg" class="img-fluid rounded border shadow-sm" style="max-height: 250px;">
-                                    <div class="alert alert-secondary mt-2 small text-start bg-light border-0">
-                                        <i class="fas fa-info-circle me-1"></i> 
-                                        Red areas indicate the visual patterns the AI used for this diagnosis.
+                            <div id="uploadContainer">
+                                <div class="upload-zone mb-3" onclick="document.getElementById('imageInput').click()">
+                                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                    <p class="mb-0 fw-bold">Click to Upload Image</p>
+                                    <small class="text-muted">JPG, PNG (Max 5MB)</small>
+                                    <input type="file" class="form-control d-none" id="imageInput" accept="image/*" onchange="previewImage(event)">
+                                </div>
+                            </div>
+
+                            <div id="previewArea" class="d-none text-center">
+                                <div class="image-box mb-3 mx-auto" style="max-width: 300px;">
+                                    <span class="image-label">Preview</span>
+                                    <img id="preview" class="img-fluid">
+                                </div>
+                                <button class="btn btn-grad w-50" onclick="uploadScan()" id="scanBtn">
+                                    <i class="fas fa-magic me-2"></i>Analyze Image
+                                </button>
+                                <button class="btn btn-sm btn-link text-muted d-block mx-auto mt-2" onclick="resetUpload()">Cancel</button>
+                            </div>
+
+                            <div id="resultArea" class="d-none">
+                                <div class="text-center mb-4">
+                                    <h3 class="text-dark fw-bold mb-1" id="predText"></h3>
+                                    <div class="confidence-badge" id="confText"></div>
+                                    <small class="text-muted">AI Confidence Score</small>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-6">
+                                        <div class="image-box">
+                                            <span class="image-label">Original Image</span>
+                                            <img id="resOriginal" class="img-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="image-box">
+                                            <span class="image-label">AI Heatmap</span>
+                                            <img id="heatmapImg" class="img-fluid">
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div id="dynamicAlert" class="alert d-none text-start" role="alert"></div>
+                                <div class="alert alert-secondary py-2 px-3 small border-0 bg-light">
+                                    <i class="fas fa-info-circle me-1 text-primary"></i> 
+                                    <strong>Explainability:</strong> Red regions in the heatmap indicate the patterns most influential to the AI's diagnosis.
+                                </div>
 
-                                <div class="bg-light p-3 rounded mt-3 text-muted small">
-                                    <i class="fas fa-comment-dots me-2"></i>
+                                <!-- Dynamic Alert with Help Message & Referral Button -->
+                                <div id="dynamicAlert" class="alert-custom d-none"></div>
+
+                                <div class="alert alert-light border mt-3 small text-muted">
+                                    <i class="fas fa-comment-dots me-2 text-primary"></i>
                                     <strong>Help us improve:</strong> 
-                                    Your feedback helps us refine our diagnostic accuracy. Please let us know if this result was helpful in the 
-                                    <a href="#" onclick="goToFeedback()" class="text-primary fw-bold">Feedback Tab</a>.
+                                    Your feedback helps refine our accuracy. Please rate this result in the 
+                                    <a href="#" onclick="goToFeedback()" class="fw-bold text-primary">Feedback Tab</a>.
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="resetUpload()">Analyze Another Image</button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="doctors-tab">
-                <div class="row mb-4">
-                    <div class="col-md-6 mx-auto d-flex gap-2">
-                        <select id="cityFilter" class="form-select rounded-pill shadow-sm" onchange="loadDoctors()">
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-8 d-flex gap-2">
+                        <select id="cityFilter" class="form-select modern-input" onchange="loadDoctors()">
                             <option value="">All Cities</option>
                             <option value="Peshawar">Peshawar</option>
                             <option value="Lahore">Lahore</option>
                             <option value="Islamabad">Islamabad</option>
                         </select>
-                         <select id="specialtyFilter" class="form-select rounded-pill shadow-sm" onchange="loadDoctors()">
+                        <select id="specialtyFilter" class="form-select modern-input" onchange="loadDoctors()">
                             <option value="">All Specialties</option>
                             <option value="Dermatologist">Dermatologist</option>
                             <option value="Oncologist">Oncologist</option>
                         </select>
                     </div>
                 </div>
-                <div class="row g-4" id="doctorsList"></div>
+                <div class="row g-3" id="doctorsList"></div>
             </div>
 
             <div class="tab-pane fade" id="history-tab">
                 <div class="feature-card p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="bg-light text-muted small text-uppercase">
-                                <tr>
-                                    <th class="ps-4">Date</th>
-                                    <th>Scan</th>
-                                    <th>Result</th>
-                                    <th>Confidence</th>
-                                </tr>
-                            </thead>
-                            <tbody id="historyTable"></tbody>
-                        </table>
-                    </div>
+                    <table class="table table-hover align-middle mb-0" style="font-size: 0.9rem;">
+                        <thead class="bg-light">
+                            <tr><th class="ps-4">Date</th><th>Image</th><th>Result</th><th>Confidence</th></tr>
+                        </thead>
+                        <tbody id="historyTable"></tbody>
+                    </table>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="feedback-tab">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="feature-card p-5">
-                            <h4 class="text-center fw-bold mb-4">Rate Your Experience</h4>
-                            <div class="mb-3">
-                                <label class="form-label text-muted small">Subject</label>
-                                <input type="text" id="fbSubject" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-muted small">Message</label>
-                                <textarea id="fbMessage" class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label text-muted small">Rating (1-5)</label>
-                                <input type="range" class="form-range" min="1" max="5" id="fbRating" oninput="document.getElementById('rateVal').innerText = this.value">
-                                <div class="text-center fw-bold text-primary fs-4" id="rateVal">3</div>
-                            </div>
-                            <button class="btn btn-grad w-100 rounded-pill" onclick="sendFeedback()">Submit Feedback</button>
+                <div class="feature-card feedback-form">
+                    <h5 class="text-center fw-bold mb-4">We value your feedback</h5>
+                    <div class="mb-4">
+                        <label class="modern-label">Subject</label>
+                        <input type="text" id="fbSubject" class="modern-input" placeholder="What is this about?">
+                    </div>
+                    <div class="mb-4">
+                        <label class="modern-label">Message</label>
+                        <textarea id="fbMessage" class="modern-input" rows="4" placeholder="Tell us more about your experience..."></textarea>
+                    </div>
+                    <div class="text-center mb-4">
+                        <label class="modern-label d-block mb-2">How would you rate us?</label>
+                        <div style="display: inline-flex; flex-direction: row-reverse; gap: 0.5rem;">
+                            <label for="s5" class="star-label"><i class="fas fa-star"></i></label><input type="radio" name="rating" id="s5" value="5" class="star-input d-none">
+                            <label for="s4" class="star-label"><i class="fas fa-star"></i></label><input type="radio" name="rating" id="s4" value="4" class="star-input d-none">
+                            <label for="s3" class="star-label"><i class="fas fa-star"></i></label><input type="radio" name="rating" id="s3" value="3" class="star-input d-none" checked>
+                            <label for="s2" class="star-label"><i class="fas fa-star"></i></label><input type="radio" name="rating" id="s2" value="2" class="star-input d-none">
+                            <label for="s1" class="star-label"><i class="fas fa-star"></i></label><input type="radio" name="rating" id="s1" value="1" class="star-input d-none">
                         </div>
                     </div>
+                    <button class="btn btn-grad w-100 py-2" onclick="sendFeedback()">
+                        <i class="fas fa-paper-plane me-2"></i>Submit Feedback
+                    </button>
                 </div>
             </div>
+
         </div>
     </div>
 
     <div class="modal fade" id="bookingModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content border-0 shadow">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title">Book Appointment</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                <div class="modal-header bg-light border-0 py-3">
+                    <h6 class="modal-title fw-bold">Book Appointment</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4">
+                <div class="modal-body p-3">
                     <input type="hidden" id="bookDocId">
                     <div class="mb-3">
-                        <label class="form-label small text-muted">Date & Time</label>
-                        <input type="datetime-local" id="bookDate" class="form-control">
+                        <label class="modern-label small">Date & Time</label>
+                        <input type="datetime-local" id="bookDate" class="modern-input p-2">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small text-muted">Symptoms</label>
-                        <textarea id="bookSymptoms" class="form-control" rows="3"></textarea>
+                        <label class="modern-label small">Symptoms</label>
+                        <textarea id="bookSymptoms" class="modern-input p-2" rows="2" placeholder="Briefly describe..."></textarea>
                     </div>
-                    <button type="button" class="btn btn-grad w-100 rounded-pill" onclick="confirmBooking()">Confirm Booking</button>
+                    <button class="btn btn-grad w-100 btn-sm py-2" onclick="confirmBooking()">Confirm Appointment</button>
                 </div>
             </div>
         </div>
@@ -271,28 +470,36 @@
                 });
                 if (res.ok) {
                     const user = await res.json();
-                    const name = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-                    document.getElementById('username-display').innerText = name;
-                } else {
-                    document.getElementById('username-display').innerText = "Guest";
+                    document.getElementById('username-display').innerText = user.username.charAt(0).toUpperCase() + user.username.slice(1);
                 }
             } catch (error) { console.error(error); }
         }
 
         // --- TAB 1: AI LOGIC ---
         function previewImage(event) {
-            const img = document.getElementById('preview');
-            img.src = URL.createObjectURL(event.target.files[0]);
-            img.classList.remove('d-none');
+            const file = event.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                document.getElementById('preview').src = url;
+                document.getElementById('resOriginal').src = url; // Set for side-by-side
+                
+                document.getElementById('uploadContainer').classList.add('d-none');
+                document.getElementById('previewArea').classList.remove('d-none');
+                document.getElementById('resultArea').classList.add('d-none');
+            }
+        }
+
+        function resetUpload() {
+            document.getElementById('imageInput').value = '';
+            document.getElementById('uploadContainer').classList.remove('d-none');
+            document.getElementById('previewArea').classList.add('d-none');
             document.getElementById('resultArea').classList.add('d-none');
         }
 
         async function uploadScan() {
             const file = document.getElementById('imageInput').files[0];
-            if(!file) return alert("Please select an image");
-            
             const btn = document.getElementById('scanBtn');
-            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Analyzing...';
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
             btn.disabled = true;
 
             const formData = new FormData();
@@ -313,53 +520,83 @@
                     
                     const heatUrl = data.heatmap_url.startsWith('http') ? data.heatmap_url : BASE_URL + data.heatmap_url;
                     document.getElementById('heatmapImg').src = heatUrl;
+                    
+                    document.getElementById('previewArea').classList.add('d-none');
                     document.getElementById('resultArea').classList.remove('d-none');
 
-                    // --- NEW ALERT LOGIC ---
+                    // --- UPDATED ALERT LOGIC WITH HELP MESSAGE & REFERRAL LINK ---
                     const alertBox = document.getElementById('dynamicAlert');
-                    alertBox.classList.remove('d-none', 'alert-danger', 'alert-success', 'alert-warning');
+                    alertBox.className = 'alert-custom d-none'; 
                     
+                    let helpMsg = "";
+                    let docBtn = "";
+
                     if (raw === "Melanoma" || raw === "Squamous cell carcinoma") {
-                        // High Risk Case
-                        alertBox.classList.add('alert-danger');
+                        // High Risk
+                        alertBox.classList.add('alert-danger', 'd-block');
+                        helpMsg = `
+                            <div class="help-message-box">
+                                <h6 class="fw-bold text-dark"><i class="fas fa-question-circle me-1 text-danger"></i> Help & Next Steps</h6>
+                                <p class="mb-0 text-muted">This result indicates a high risk. Please do not panic, but it is critical to get a professional diagnosis. Avoid touching the area and schedule an appointment.</p>
+                            </div>`;
+                        docBtn = `
+                            <div class="mt-3">
+                                <label class="small fw-bold text-muted mb-1 d-block">Doctor Referral</label>
+                                <button class="btn btn-danger w-100 py-2 shadow-sm" onclick="findOncologist()">
+                                    <i class="fas fa-user-md me-2"></i>Connect with an Oncologist
+                                </button>
+                            </div>`;
+
                         alertBox.innerHTML = `
-                            <h5 class="alert-heading fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>High Risk Detected</h5>
-                            <p class="mb-0">The analysis suggests a potential malignancy. We strongly recommend consulting a specialist immediately.</p>
-                            <hr>
-                            <button class="btn btn-danger btn-sm" onclick="findOncologist()">
-                                <i class="fas fa-user-md me-1"></i> Find Oncologist Now
-                            </button>
-                        `;
+                            <h5 class="fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>High Risk Detected</h5>
+                            <p class="mb-0">The analysis suggests a potential malignancy.</p>
+                            ${helpMsg}
+                            ${docBtn}`;
+                            
                     } else if (raw === "Normal") {
-                        // Normal Case
-                        alertBox.classList.add('alert-success');
+                        // Normal
+                        alertBox.classList.add('alert-success', 'd-block');
+                        helpMsg = `
+                            <div class="help-message-box">
+                                <h6 class="fw-bold text-dark"><i class="fas fa-smile me-1 text-success"></i> Good News</h6>
+                                <p class="mb-0 text-muted">No concerning patterns were found. Maintain good skin hygiene and use sunscreen regularly.</p>
+                            </div>`;
+                        
                         alertBox.innerHTML = `
-                            <h5 class="alert-heading fw-bold"><i class="fas fa-check-circle me-2"></i>No Anomalies Detected</h5>
-                            <p class="mb-0">The skin pattern appears normal. No immediate consultation is required, but please monitor for changes.</p>
-                        `;
+                            <h5 class="fw-bold"><i class="fas fa-check-circle me-2"></i>No Anomalies Detected</h5>
+                            <p class="mb-0">The skin pattern appears normal.</p>
+                            ${helpMsg}`;
+
                     } else {
-                        // Other Diseases (Eczema, Ringworm, etc.)
-                        alertBox.classList.add('alert-warning');
+                        // Other Conditions
+                        alertBox.classList.add('alert-warning', 'd-block');
+                         helpMsg = `
+                            <div class="help-message-box">
+                                <h6 class="fw-bold text-dark"><i class="fas fa-info-circle me-1 text-warning"></i> Help & Guidance</h6>
+                                <p class="mb-0 text-muted">A specific skin condition was identified. While likely not life-threatening, it may require treatment. We recommend seeing a specialist.</p>
+                            </div>`;
+                        docBtn = `
+                            <div class="mt-3">
+                                <label class="small fw-bold text-muted mb-1 d-block">Doctor Referral</label>
+                                <button class="btn btn-warning w-100 py-2 shadow-sm text-dark" onclick="findDermatologist()">
+                                    <i class="fas fa-user-md me-2"></i>Book Dermatologist Appointment
+                                </button>
+                            </div>`;
+
                         alertBox.innerHTML = `
-                            <h5 class="alert-heading fw-bold"><i class="fas fa-info-circle me-2"></i>Skin Condition Detected</h5>
-                            <p class="mb-0">A skin condition was identified. You may browse our list of dermatologists for advice.</p>
-                            <hr>
-                            <button class="btn btn-warning btn-sm" onclick="findDermatologist()">
-                                <i class="fas fa-user-md me-1"></i> Find Dermatologist
-                            </button>
-                        `;
+                            <h5 class="fw-bold"><i class="fas fa-stethoscope me-2"></i>Condition Detected</h5>
+                            <p class="mb-0">The AI identified a skin condition.</p>
+                            ${helpMsg}
+                            ${docBtn}`;
                     }
 
-                } else {
-                    alert("Analysis Failed: " + JSON.stringify(data));
-                }
-            } catch(e) { console.error(e); alert("Connection Error"); }
+                } else { alert("Analysis Failed"); }
+            } catch(e) { alert("Error connecting to server"); }
             
-            btn.innerHTML = 'Analyze Image';
+            btn.innerHTML = '<i class="fas fa-magic me-2"></i>Analyze Image';
             btn.disabled = false;
         }
 
-        // Helper functions for the alerts
         function findOncologist() {
             document.getElementById('doctors-tab-btn').click();
             document.getElementById('specialtyFilter').value = 'Oncologist';
@@ -371,48 +608,40 @@
             loadDoctors('Dermatologist');
         }
 
-        // --- TAB 2: DOCTOR LOGIC ---
+        // --- TAB 2: DOCTORS ---
         async function loadDoctors(autoSpecialty = null) {
             const city = document.getElementById('cityFilter').value;
             const specialty = autoSpecialty || document.getElementById('specialtyFilter').value;
-            
-            let url = `${BASE_URL}/api/appointments/doctors/`;
-            const params = new URLSearchParams();
-            if(city) params.append('city', city);
-            if(specialty) params.append('specialty', specialty);
-
-            if(params.toString()) url += `?${params.toString()}`;
+            let url = `${BASE_URL}/api/appointments/doctors/?`;
+            if(city) url += `city=${city}&`;
+            if(specialty) url += `specialty=${specialty}`;
 
             const list = document.getElementById('doctorsList');
-            list.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div></div>';
+            list.innerHTML = '<div class="text-center col-12"><div class="spinner-border text-primary"></div></div>';
 
             try {
                 const res = await fetch(url);
                 const data = await res.json();
                 list.innerHTML = '';
-
-                if(data.results.length === 0) {
-                    list.innerHTML = '<div class="col-12 text-center text-muted">No doctors found matching filters.</div>';
+                if(!data.results.length) {
+                    list.innerHTML = '<div class="col-12 text-center text-muted small">No doctors found.</div>';
                     return;
                 }
-
                 data.results.forEach(doc => {
                     list.innerHTML += `
                     <div class="col-md-6">
-                        <div class="feature-card p-3 d-flex align-items-center">
-                            <div class="bg-light rounded-circle p-3 me-3 text-primary">
-                                <i class="fas fa-user-md fa-2x"></i>
-                            </div>
+                        <div class="feature-card doctor-card h-100">
+                            <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
                             <div class="flex-grow-1">
-                                <h5 class="mb-0 fw-bold">Dr. ${doc.name}</h5>
-                                <small class="text-muted d-block">${doc.specialization}</small>
-                                <small class="text-primary"><i class="fas fa-map-marker-alt me-1"></i> ${doc.city}</small>
+                                <h5 class="mb-0">Dr. ${doc.name}</h5>
+                                <small class="text-muted d-block">${doc.specialty}</small>
+                                <small class="text-primary fw-bold">${doc.city}</small>
                             </div>
-                            <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="openBooking(${doc.id})">Book</button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="openBooking(${doc.id})">Book</button>
                         </div>
                     </div>`;
                 });
-            } catch (e) { list.innerHTML = '<div class="text-danger">Failed to load doctors.</div>'; }
+            } catch(e) { list.innerHTML = '<div class="text-danger col-12 text-center">Failed to load.</div>'; }
         }
 
         function openBooking(id) {
@@ -424,6 +653,7 @@
             const docId = document.getElementById('bookDocId').value;
             const date = document.getElementById('bookDate').value;
             const symptoms = document.getElementById('bookSymptoms').value;
+            if(!date) return alert("Select a date");
 
             const res = await fetch(`${BASE_URL}/api/appointments/book/`, {
                 method: 'POST',
@@ -432,56 +662,44 @@
             });
 
             if(res.ok) {
-                alert("Appointment Confirmed!");
+                alert("Booked!");
                 bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
-            } else {
-                alert("Booking Failed. Check availability.");
-            }
+            } else { alert("Booking failed."); }
         }
 
-        // --- TAB 3: HISTORY LOGIC ---
+        // --- TAB 3 & 4 ---
         async function loadHistory() {
-            const res = await fetch(`${BASE_URL}/api/web/history/`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
+            const res = await fetch(`${BASE_URL}/api/web/history/`, { headers: { 'Authorization': `Bearer ${token}` } });
             const data = await res.json();
             const tbody = document.getElementById('historyTable');
             tbody.innerHTML = '';
-            
-            data.results.forEach(scan => {
-                const imgUrl = scan.image.startsWith('http') ? scan.image : BASE_URL + scan.image;
-                const friendlyName = DISEASE_MAP[scan.prediction] || scan.prediction;
-                
-                tbody.innerHTML += `
-                <tr>
-                    <td class="ps-4">${new Date(scan.created_at).toLocaleDateString()}</td>
-                    <td><img src="${imgUrl}" class="rounded" style="width: 40px; height: 40px; object-fit: cover;"></td>
-                    <td class="fw-bold text-dark">${friendlyName}</td>
-                    <td><span class="badge bg-light text-dark border">${scan.confidence}%</span></td>
-                </tr>`;
+            data.results.forEach(s => {
+                const img = s.image.startsWith('http') ? s.image : BASE_URL + s.image;
+                const name = DISEASE_MAP[s.prediction] || s.prediction;
+                tbody.innerHTML += `<tr><td class="ps-4">${new Date(s.created_at).toLocaleDateString()}</td><td><img src="${img}" style="width:30px;height:30px;border-radius:4px;"></td><td>${name}</td><td>${s.confidence}%</td></tr>`;
             });
         }
 
-        // --- TAB 4: FEEDBACK LOGIC ---
         async function sendFeedback() {
-            const subject = document.getElementById('fbSubject').value;
-            const message = document.getElementById('fbMessage').value;
-            const rating = document.getElementById('fbRating').value;
-
-            const res = await fetch(`${BASE_URL}/api/web/feedback/`, {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ subject, message, rating })
+            const subj = document.getElementById('fbSubject').value;
+            const msg = document.getElementById('fbMessage').value;
+            const rate = document.querySelector('input[name="rating"]:checked').value;
+            await fetch(`${BASE_URL}/api/web/feedback/`, {
+                method: 'POST', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ subject: subj, message: msg, rating: rate })
             });
-
-            if(res.ok) {
-                alert("Thank you for your feedback!");
-                document.getElementById('fbSubject').value = '';
-                document.getElementById('fbMessage').value = '';
-            } else {
-                alert("Error sending feedback.");
-            }
+            alert("Feedback Sent!");
+            document.getElementById('fbMessage').value = '';
+            document.getElementById('fbSubject').value = '';
         }
+        
+        // Star Logic
+        document.querySelectorAll('.star-label').forEach(l => {
+            l.addEventListener('click', e => {
+                const input = document.getElementById(l.getAttribute('for'));
+                if(input) input.checked = true;
+            });
+        });
     </script>
 </body>
 </html>
